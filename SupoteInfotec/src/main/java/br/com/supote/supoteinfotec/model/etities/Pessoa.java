@@ -7,8 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import org.hibernate.annotations.ForeignKey;
 
 /**
  *
@@ -34,9 +36,24 @@ public class Pessoa implements Serializable{
     @Column (name="DataInicial",nullable=false, length = 12)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataAbertura;    
-
+    
+    @ManyToOne(optional = false)
+    @ForeignKey(name = "PessoaDescrcao")
+    private Pessoa pessoa;
+    
+    
     public Pessoa() {
     }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+    
+    
 
     public void setIdPessoa(Integer idPessoa) {
         this.idPessoa = idPessoa;
@@ -57,6 +74,32 @@ public class Pessoa implements Serializable{
     public void setDataAbertura(Date dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Integer getIdPessoa() {
+        return idPessoa;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -79,7 +122,5 @@ public class Pessoa implements Serializable{
         }
         return true;
     }
-
-   
     
 }
